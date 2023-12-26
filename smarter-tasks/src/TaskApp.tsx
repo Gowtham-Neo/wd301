@@ -2,13 +2,13 @@ import React from "react";
 import { TaskItem } from "./types";
 import TaskForm from "./TaskForm";
 import TaskList from "./TaskList";
-import { uselocalStorage } from "./hooks/useLocalStorage";
+import { useLocalStorage } from "./hooks/useLocalStorage";
 
 interface TaskAppState {
   tasks: TaskItem[];
 }
 const TaskApp = () => {
-  const [taskAppState, setTaskAppState] = uselocalStorage<TaskAppState>("tasks", {
+  const [taskAppState, setTaskAppState] = useLocalStorage<TaskAppState>("tasks", {
     tasks: [],
   });
 
