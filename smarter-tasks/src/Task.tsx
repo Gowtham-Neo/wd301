@@ -1,4 +1,3 @@
-import React from "react";
 import "./TaskCard.css";
 import { TaskItem } from "./types";
 
