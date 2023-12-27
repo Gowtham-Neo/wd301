@@ -17,15 +17,9 @@ const TaskList: React.FC<Props> = ({ tasks, deleteTask }) => {
       {tasks.map((task, idx) => (
         <li key={idx}>
           <Task
-            task={task}
-            onDelete={() => handleDeleteTasks(idx)}
+            item={task}
+            removeTask={() => handleDeleteTasks(idx)}
           />
-          <button
-            className="pl-4 pr-4 m-4 bg-red-600 border rounded deleteTaskButton"
-            onClick={() => handleDeleteTasks(idx)}
-          >
-            Delete
-          </button>
         </li>
       ))}
     </ul>
