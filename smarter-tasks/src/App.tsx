@@ -1,5 +1,4 @@
 import './App.css';
-import TaskApp from "./TaskApp";
 import HomePage from './pages/HomePage';
 import TaskListPage from './pages/TaskListPage';
 import {
