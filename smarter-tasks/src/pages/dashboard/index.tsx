@@ -1,22 +1,23 @@
-import { useNavigate } from 'react-router-dom';
+import React from 'react';
+import { useNavigate,Navigate } from 'react-router-dom';
 
-const Dashboard = () => {
-    const navigate = useNavigate();
-    const userDataString = localStorage.getItem('userData');
 
-    const handleLogout = () => {
-        localStorage.removeItem('authToken');
-        localStorage.removeItem('userData');
-        navigate('/signin');
-    };
+const Dashboard: React.FC = () => {
 
-    let userData = null;
-    try {
-        userData = userDataString ? JSON.parse(userDataString) : null;
-    } catch (error) {
-        console.error('Error parsing user data:', error);
-    }
+  const userDataString = localStorage.getItem('userData');
+  const navigate = useNavigate();
 
+  const handleLogout = () => {
+    localStorage.removeItem('userData');
+    localStorage.removeItem('authToken');
+    navigate('/signin');
+  };
+  if (userDataString === 'undefined' || userDataString === null) {
+    return (
+      <Navigate to="/signin"/>
+    );
+  }
+  const userData = JSON.parse(userDataString);
     return (
         <div className="flex items-center justify-center h-screen bg-white">
             <div className="p-8 border border-black rounded-xl bg-slate-50">

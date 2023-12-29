@@ -9,7 +9,7 @@ const SignupForm: React.FC = () => {
     const [userPassword, setUserPassword] = useState('');
     const navigate = useNavigate();
 
-    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    const handlesubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
         try {
@@ -37,7 +37,7 @@ const SignupForm: React.FC = () => {
     };
     return (
         <div>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handlesubmit}>
                 <div>
                     <label className="block mb-2 font-semibold text-gray-700">Organisation Name:</label>
                     <input type="text" name="organisationName" id="organisationName" value={organisationName} onChange={(e) => setOrganisationName(e.target.value)} className="w-full px-3 py-2 leading-tight text-gray-700 border rounded-md focus:outline-none focus:border-blue-500 focus:shadow-outline-blue" />

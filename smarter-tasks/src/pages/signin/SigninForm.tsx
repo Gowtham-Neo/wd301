@@ -7,7 +7,7 @@ const SigninForm: React.FC = () => {
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
 
-    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    const handlesubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         try {
             const response = await fetch(`${API_ENDPOINT}/users/sign_in`, {
@@ -23,9 +23,10 @@ const SigninForm: React.FC = () => {
             const data = await response.json();
             localStorage.setItem('authToken', data.token);
             localStorage.setItem('userData', JSON.stringify(data.user));
-
+            
             console.log('Sign-in successful');
             navigate('/dashboard');
+            
         } catch (error) {
             console.error('Sign-in failed:', error);
         }
@@ -35,7 +36,7 @@ const SigninForm: React.FC = () => {
 
     return (
         <div>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handlesubmit}>
                 <div>
                     <label className="block mb-2 font-semibold text-gray-700">Email:</label>
                     <input type="email" name="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} className="w-full px-3 py-2 leading-tight text-gray-700 border rounded-md focus:outline-none focus:border-blue-500 focus:shadow-outline-blue" />
