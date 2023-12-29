@@ -34,6 +34,7 @@ const SignupForm: React.FC = () => {
 
     };
     return (
+        <div>
         <form onSubmit={handleSubmit}>
             <div>
                 <label className="block mb-2 font-semibold text-gray-700">Organisation Name:</label>
@@ -53,6 +54,10 @@ const SignupForm: React.FC = () => {
             </div>
             <button type="submit" className="w-full px-4 py-2 mt-4 font-semibold text-white bg-gray-700 rounded-md hover:bg-gray-800 focus:outline-none focus:shadow-outline-gray">Sign up</button>
         </form>
+        <p className="mt-4 text-sm text-gray-600">
+                Don't have an account? <a href="/signin" className="text-blue-500 hover:text-blue-700">Sign In</a>
+            </p>
+        </div>
     );
 };
 
