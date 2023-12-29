@@ -29,6 +29,7 @@ const Dashboard: React.FC = () => {
             <div className="p-8 border border-black rounded-xl bg-slate-50">
                 <h1 className="mb-6 text-3xl font-bold text-center text-gray-800">Dashboard</h1>
                 <button
+                    id='logout-link'
                     onClick={handleLogout}
                     className="absolute px-4 py-2 font-semibold bg-red-700 rounded t4ext-white right-4 top-4 hover:bg-red-800 focus:shadow-outline-gray"
                 >
