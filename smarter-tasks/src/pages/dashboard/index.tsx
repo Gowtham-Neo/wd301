@@ -11,12 +11,10 @@ const Dashboard = () => {
     };
 
     let userData = null;
-    if (userDataString) {
-        try {
-            userData = JSON.parse(userDataString);
-        } catch (error) {
-            console.error('Error parsing user data:', error);
-        }
+    try {
+        userData = userDataString ? JSON.parse(userDataString) : null;
+    } catch (error) {
+        console.error('Error parsing user data:', error);
     }
 
     return (
@@ -30,8 +28,8 @@ const Dashboard = () => {
                     Logout
                 </button>
                 <div className="mb-4 text-xl text-center text-gray-800">
-                    <h2 className="mb-2">Name: {userData?.name}</h2>
-                    <h1>Email: {userData?.email}</h1>
+                    <h2 className="mb-2">Name: {userData?.name || 'Not available'}</h2>
+                    <h1>Email: {userData?.email || 'Not available'}</h1>
                 </div>
             </div>
         </div>

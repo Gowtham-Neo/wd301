@@ -2,11 +2,9 @@ import React, { useState } from 'react';
 import { API_ENDPOINT } from '../../config/constants';
 import { useNavigate } from 'react-router-dom';
 
-
 const SigninForm: React.FC = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-
     const navigate = useNavigate();
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -21,17 +19,18 @@ const SigninForm: React.FC = () => {
             if (!response.ok) {
                 throw new Error('Sign-in failed');
             }
-            console.log('Sign-in successful');
-            navigate('/dashboard');
 
             const data = await response.json();
             localStorage.setItem('authToken', data.token);
             localStorage.setItem('userData', JSON.stringify(data.user));
 
+            console.log('Sign-in successful');
+            navigate('/dashboard');
         } catch (error) {
             console.error('Sign-in failed:', error);
         }
     };
+
 
 
     return (
