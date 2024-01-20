@@ -3,12 +3,11 @@ import Task from "./Task";
 import { ColumnData, TaskDetails } from "../../context/task/types";
 import { Droppable } from "react-beautiful-dnd";
 import { forwardRef } from "react";
-import { Draggable } from "react-beautiful-dnd";
 
 const Container = (props: React.PropsWithChildren) => {
   // We will use flex to display lists as columns
   return (
-    <div className="m-2 border border-gray rounded w-1/3 flex flex-col">
+    <div className="flex flex-col w-1/3 m-2 border rounded border-gray">
       {props.children}
     </div>
   );

@@ -1,6 +1,6 @@
 import { TaskDetails } from "../../context/task/types";
 import { Link } from "react-router-dom";
-import React, { forwardRef, useContext } from "react";
+import React, { forwardRef } from "react";
 import { useParams } from "react-router-dom";
 import { useTasksDispatch } from "../../context/task/context";
 import { deleteTask } from "../../context/task/actions";
