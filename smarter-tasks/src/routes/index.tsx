@@ -6,7 +6,11 @@ import ProtectedRoute from "./ProtectedRoutes"
 import Projects from "../pages/projects"
 import Members from "../pages/members"
 import Logout from "../pages/logout";
+import NewTask from "../pages/tasks/NewTask";
+import ProjectDetails from "../pages/project_details";
+import ProjectContainer from "../pages/projects/ProjectContainer";
 import NotFound from "../pages/Notfound";
+import TaskDetailsContainer from "../pages/tasks/TaskDetailsContainer";
 
 const router = createBrowserRouter([
   {
@@ -43,7 +47,33 @@ const router = createBrowserRouter([
       },
       {
         path: "projects",
-        element: (<Projects />)
+        element: <ProjectContainer />,
+        children: [
+          { index: true, element: <Projects /> },
+          {
+            path: ":projectID",
+            element: <ProjectDetails />,
+            children: [
+              { index: true, element: <></> },
+              {
+                path: "tasks",
+                children: [
+                  { index: true, element: <Navigate to="../" /> },
+                  {
+                    path: "new",
+                    element: <NewTask />,
+                  },
+                  {
+                    path: ":taskID",
+                    children: [
+                      { index: true, element: <TaskDetailsContainer /> },
+                    ],
+                  },
+                ],
+              },
+            ],
+          },
+        ],
       },
       {
         path: "members",
