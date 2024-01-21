@@ -21,6 +21,7 @@ const NewProject = () => {
   const dispatchProjects = useProjectsDispatch();
   const {
     handleSubmit,
+    register,
     formState: { errors },
   } = useForm<Inputs>();
   const closeModal = () => {
@@ -32,16 +33,12 @@ const NewProject = () => {
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     const { name } = data;
 
-    // Next, I'll call the addProject function with two arguments:
-    //`dispatchProjects` and an object with `name` attribute.
-    // As it's an async function, we will await for the response.
+
     const response = await addProject(dispatchProjects, { name });
 
-    // Then depending on response, I'll either close the modal...
     if (response.ok) {
       setIsOpen(false);
     } else {
-      // Or I'll set the error.
       setError(response.error as React.SetStateAction<null>);
     }
   };
@@ -88,16 +85,16 @@ const NewProject = () => {
                   </Dialog.Title>
                   <div className="mt-2">
                     <form onSubmit={handleSubmit(onSubmit)}>
-                      {/* I'll show the error, if it exists.*/}
                       {error && <span>{error}</span>}
                       <input
                         type="text"
-                        name="name"
                         placeholder="Enter project name..."
                         autoFocus
+                        {...register("name", { required: true })}
                         className={`w-full border rounded-md py-2 px-3 my-4 text-gray-700 leading-tight focus:outline-none focus:border-blue-500 focus:shadow-outline-blue ${
                           errors.name ? "border-red-500" : ""
                         }`}
+                        
                       />
                       {errors.name && <span>This field is required</span>}
                       <button
@@ -126,3 +123,5 @@ const NewProject = () => {
   );
 };
 export default NewProject;
+
+
