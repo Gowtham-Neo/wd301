@@ -1,9 +1,5 @@
 export type AvailableColumns = "pending" | "in_progress" | "done";
-export interface TaskListState {
-    isLoading: boolean;
-    isError: boolean;
-    errorMessage: string;
-}
+
 
 export type TaskDetailsPayload = Omit<TaskDetails, "id" | "assignee" | "state">;
 export type ColumnData = {

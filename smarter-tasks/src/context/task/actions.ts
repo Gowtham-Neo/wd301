@@ -160,39 +160,3 @@ export const updateTask = async (
     });
   }
 };
-export const addCommend = async (
-  dispatch: TasksDispatch,
-  projectID: string,
-  task: TaskDetails
-) => {
-  const token = localStorage.getItem("authToken") ?? "";
-  try {
-    // Display loading status
-    dispatch({ type: TaskListAvailableAction.UPDATE_TASK_REQUEST });
-    const response = await fetch(
-      `${API_ENDPOINT}/projects/${projectID}/tasks/${task.id}/comments`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify(task),
-      }
-    );
-
-    if (!response.ok) {
-      throw new Error("Failed to update task");
-    }
-    // Display success and refresh the tasks
-    dispatch({ type: TaskListAvailableAction.UPDATE_TASK_SUCCESS });
-    refreshTasks(dispatch, projectID);
-  } catch (error) {
-    console.error("Operation failed:", error);
-    // Display error status
-    dispatch({
-      type: TaskListAvailableAction.UPDATE_TASK_FAILURE,
-      payload: "Unable to update task",
-    });
-  }
-};

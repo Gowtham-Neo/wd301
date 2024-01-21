@@ -12,11 +12,13 @@ import { updateTask } from "../../context/task/actions";
 import { useMembersState } from "../../context/members/context";
 import { useProjectsState } from "../../context/projects/context";
 import { TaskDetailsPayload } from "../../context/task/types";
-import { CommentDetailsPayload } from "../../context/comment/types";
 import { fetchComment, addComment } from "../../context/comment/actions";
 
 type TaskFormUpdatePayload = TaskDetailsPayload & {
   selectedPerson: string;
+};
+type Inputs = {
+  description: string;
 };
 
 const formatDateForPicker = (isoDate: string) => {
@@ -48,22 +50,22 @@ const TaskDetails = () => {
   )[0];
 
   const selectedTask = taskListState.projectData.tasks[taskID ?? ""];
-  const commentsDispatch = useCommentsDispatch();
+  const dispatch = useCommentsDispatch();
   const commentsState = useCommentsState();
   useEffect(() => {
     const fetchData = async () => {
       try {
         if (projectID && taskID) {
           console.log("Fetching comments...");
-          await fetchComment(commentsDispatch, projectID, taskID);
+          await fetchComment(dispatch, projectID, taskID);
         }
       } catch (error) {
         console.error("Error fetching comments:", error);
       }
     };
-  
+
     fetchData();
-  }, [projectID, taskID, commentsDispatch,commentsState]);
+  }, [projectID, taskID]);
 
   const [selectedPerson, setSelectedPerson] = useState(
     selectedTask.assignedUserName ?? ""
@@ -101,11 +103,11 @@ const TaskDetails = () => {
     });
     closeModal();
   };
-  const onSubmitComment: SubmitHandler<CommentDetailsPayload> = async () => {
+  const onSubmitComment: SubmitHandler<Inputs> = async () => {
     const comment = {
       description: inputComment,
     };
-    addComment(commentsDispatch, projectID ?? "", taskID ?? "", comment);
+    addComment(dispatch, projectID ?? "", taskID ?? "", comment);
     setInputComment("");
   };
 
@@ -264,13 +266,28 @@ const TaskDetails = () => {
                       ) : commentsState.isError ? (
                         <p>Error: {commentsState.errorMessage}</p>
                       ) : (
-                        <>
+                        <div className="mt-2 space-y-4">
                           {commentsState.data.map((comment) => (
                             <div
                               key={comment.id}
                               className="p-3 bg-gray-100 rounded-lg shadow-md comment"
                             >
                               <div className="text-gray-600">
+                                {comment.User && (
+                                  <>
+                                    <p className="m-2">
+                                      <strong>Name:</strong>{" "}
+                                      {comment.User.name}
+                                    </p>
+                                    <p className="m-2">
+                                      <strong>Timestamp:</strong>{" "}
+                                      {comment.createdAt &&
+                                        new Date(
+                                          comment.createdAt
+                                        ).toLocaleString()}
+                                    </p>
+                                  </>
+                                )}
                                 <p className="m-2">
                                   <strong>Comment:</strong>{" "}
                                   {comment.description}
@@ -278,7 +295,7 @@ const TaskDetails = () => {
                               </div>
                             </div>
                           ))}
-                        </>
+                        </div>
                       )}
                     </div>
                   </div>
