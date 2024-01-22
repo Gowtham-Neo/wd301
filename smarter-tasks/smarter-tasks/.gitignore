@@ -22,9 +22,3 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-<<<<<<< HEAD
-
-# Local Netlify folder
-.netlify
-=======
->>>>>>> fb67666 (Pwa implementation)
