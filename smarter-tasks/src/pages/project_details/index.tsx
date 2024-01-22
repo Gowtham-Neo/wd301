@@ -1,6 +1,6 @@
+import React, { Suspense } from "react";
 import { TasksProvider } from "../../context/task/context";
 const ProjectDetails = React.lazy(() => import("./ProjectDetails"));
-import React, { Suspense } from "react";
 import ErrorBoundary from "../../components/ErrorBoundary";
 
 import { Outlet } from "react-router-dom";
