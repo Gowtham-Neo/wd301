@@ -1,7 +1,7 @@
 import React, { Suspense } from "react";
+import NewProject from "./NewProject";
 const ProjectList = React.lazy(() => import("./ProjectList"));
 import ErrorBoundary from "../../components/ErrorBoundary";
-import NewProject from "./NewProject";
 
 const Projects = () => {
   return (
