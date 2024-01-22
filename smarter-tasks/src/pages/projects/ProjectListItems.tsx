@@ -8,9 +8,6 @@ export default function ProjectListItems() {
   if (projects.length === 0 && isLoading) {
     return <span>Loading...</span>;
   }
-  if (projects.length === 0) {
-    throw Error("Error!!!");
-  }
     if (isError) {
     return <span>{errorMessage}</span>;
   }
