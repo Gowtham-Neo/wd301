@@ -1,13 +1,13 @@
 import { useEffect } from "react";
-import { Navigate } from "react-router-dom"
+import { Navigate } from "react-router-dom";
 
 const Logout = () => {
   useEffect(() => {
-    localStorage.removeItem("authToken")
-    localStorage.removeItem("userData")
-  }, [])
-  
-  return <Navigate to="/signin" />;
-}
+    localStorage.removeItem("authToken");
+    localStorage.removeItem("userData");
+  }, []);
+
+  return <Navigate to="/signup" />;
+};
 
 export default Logout;
