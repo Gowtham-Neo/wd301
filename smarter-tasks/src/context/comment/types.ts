@@ -22,7 +22,7 @@ export type CommentDetails = {
 };
 
 export type CommentDetailsPayload = {
-  comment: string;
+  description: string;
 };
 
 export enum CommentListAvailableAction {

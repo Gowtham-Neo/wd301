@@ -104,13 +104,16 @@ const TaskDetails = () => {
     closeModal();
   };
   const onSubmitComment: SubmitHandler<Inputs> = async () => {
-    const comment = {
-      comment: inputComment,
-    };
-    addComments(dispatch, projectID ?? "", taskID ?? "", comment);
-    setInputComment("");
-  };
+    try {
+      addComments(dispatch, projectID ?? "", taskID ?? "", {
+        description: inputComment,
+      });
 
+      setInputComment("");
+    } catch (error) {
+      console.error("Failed to add comment:", error);
+    }
+  };
   return (
     <>
       <Transition appear show={isOpen} as={Fragment}>
@@ -276,8 +279,7 @@ const TaskDetails = () => {
                                 {comment.User && (
                                   <>
                                     <p className="m-2">
-                                      <strong>Name:</strong>{" "}
-                                      {comment.User.name}
+                                      <strong>Name:</strong> {comment.User.name}
                                     </p>
                                     <p className="m-2">
                                       <strong>Timestamp:</strong>{" "}
