@@ -12,7 +12,7 @@ import { updateTask } from "../../context/task/actions";
 import { useMembersState } from "../../context/members/context";
 import { useProjectsState } from "../../context/projects/context";
 import { TaskDetailsPayload } from "../../context/task/types";
-import { fetchComment, addComment } from "../../context/comment/actions";
+import { fetchComment, addComments } from "../../context/comment/actions";
 
 type TaskFormUpdatePayload = TaskDetailsPayload & {
   selectedPerson: string;
@@ -105,9 +105,9 @@ const TaskDetails = () => {
   };
   const onSubmitComment: SubmitHandler<Inputs> = async () => {
     const comment = {
-      description: inputComment,
+      comment: inputComment,
     };
-    addComment(dispatch, projectID ?? "", taskID ?? "", comment);
+    addComments(dispatch, projectID ?? "", taskID ?? "", comment);
     setInputComment("");
   };
 

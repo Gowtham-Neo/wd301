@@ -3,13 +3,10 @@ import {
   CommentListAvailableAction,
   CommentListState,
   CommentActions,
+  initialStateComment
 } from "./types";
-export const initialStateComment: CommentListState = {
-  data: [],
-  isLoading: false,
-  isError: false,
-  errorMessage: "",
-};
+
+
 export const commentReducer: Reducer<CommentListState, CommentActions> = (
   state = initialStateComment,
   action

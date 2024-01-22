@@ -1,15 +1,9 @@
 import { API_ENDPOINT } from "../../config/constants";
-import {
-  CommentListAvailableAction,
-  
-  CommentsDispatch,
-} from "./types";
+import { CommentListAvailableAction, CommentDispatch } from "./types";
 import { CommentDetailsPayload } from "./types";
 
-
-
-export const addComment = async (
-  dispatch: CommentsDispatch,
+export const addComments = async (
+  dispatch: CommentDispatch,
   projectID: string,
   taskID: string,
   comment: CommentDetailsPayload
@@ -38,20 +32,21 @@ export const addComment = async (
       type: CommentListAvailableAction.CREATE_COMMENT_SUCCESS,
       payload: data,
     });
-    console.log( data);
+
+    console.log(data);
     fetchComment(dispatch, projectID, taskID);
+    
   } catch (error) {
     console.error("Operation failed:", error);
     dispatch({
       type: CommentListAvailableAction.CREATE_COMMENT_FAILURE,
-      payload: "Unable to create a comment for the task",
+      payload: "Comment is not created",
     });
   }
 };
 
-
 export const fetchComment = async (
-  dispatch: CommentsDispatch,
+  dispatch: CommentDispatch,
   projectID: string,
   taskID: string
 ) => {
@@ -61,31 +56,33 @@ export const fetchComment = async (
     const response = await fetch(
       `${API_ENDPOINT}/projects/${projectID}/tasks/${taskID}/comments`,
       {
+        method: "GET",
         headers: {
+          "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
       }
     );
 
     if (!response.ok) {
-      throw new Error("Failed to fetch the comments");
+      throw new Error("Failed to get comments");
     }
 
     const data = await response.json();
-    
+
     dispatch({
       type: CommentListAvailableAction.FETCH_COMMENT_SUCCESS,
       payload: data,
     });
-    
+
     console.log("API response data:", data);
   } catch (error) {
-    console.error("Operation is failed:", error);
+    console.error("Operation failed:", error);
     dispatch({
       type: CommentListAvailableAction.FETCH_COMMENT_FAILURE,
-      payload: "Unable to load the comments",
+      payload: "Can't get those comments",
     });
 
-    throw error; 
+    throw error;
   }
 };

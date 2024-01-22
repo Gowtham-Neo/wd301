@@ -1,3 +1,10 @@
+export const initialStateComment: CommentListState = {
+  data: [],
+  isLoading: false,
+  isError: false,
+  errorMessage: "",
+};
+
 export interface CommentListState {
   data: CommentDetails[];
   isLoading: boolean;
@@ -5,22 +12,17 @@ export interface CommentListState {
   errorMessage: string;
 }
 
-export type CommentDetailsPayload = {
-  description: string;
-};
-
 export type CommentDetails = {
   id: number;
   description: string;
-  task_id: number;
-  owner: number;
-  updatedAt: Date;
   createdAt: Date;
-  User:{
-    id:number;
-    name:string;
-    email:string;
+  User: {
+    name: string;
   };
+};
+
+export type CommentDetailsPayload = {
+  comment: string;
 };
 
 export enum CommentListAvailableAction {
@@ -50,4 +52,4 @@ export type CommentActions =
       payload: string;
     };
 
-export type CommentsDispatch = React.Dispatch<CommentActions>;
+export type CommentDispatch = React.Dispatch<CommentActions>;
